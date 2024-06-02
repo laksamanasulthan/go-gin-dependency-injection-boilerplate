@@ -1,19 +1,19 @@
 package injector
 
 import (
-	"go-gin-dependency-injection-boilerplate/domain/product/injector"
+	product_injector "go-gin-dependency-injection-boilerplate/domain/product/injector"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 type Injector struct {
-	ProductInjector *injector.ProductInjector
+	ProductInjector *product_injector.ProductInjector
 	//Other domain Injector
 }
 
 func NewInjector() (*Injector, error) {
-	dsn := "root:root@tcp(127.0.0.1:3306)/go_crud?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:@tcp(127.0.0.1:3306)/go_boilerplate?charset=utf8mb4&parseTime=True&loc=Local"
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
@@ -21,7 +21,7 @@ func NewInjector() (*Injector, error) {
 		return nil, err
 	}
 
-	productInjector := injector.NewProductInjector(db)
+	productInjector := product_injector.NewProductInjector(db)
 	//Other Domain Injector
 
 	return &Injector{

@@ -11,6 +11,7 @@ type ProductService interface {
 	CreateProduct(product *models.Product) error
 	UpdateProduct(product *models.Product) error
 	DeleteProduct(id uint) error
+	TestService() string
 }
 
 type productService struct {
@@ -39,4 +40,13 @@ func (s *productService) UpdateProduct(product *models.Product) error {
 
 func (s *productService) DeleteProduct(id uint) error {
 	return s.repo.DeleteProduct(id)
+}
+
+func (s *productService) TestService() string {
+
+	useRepo := s.repo.TestRepo()
+	resp := ", This is from service"
+
+	combineResp := useRepo + resp
+	return combineResp
 }

@@ -1,4 +1,4 @@
-package injector
+package product_injector
 
 import (
 	"go-gin-dependency-injection-boilerplate/domain/product/controllers"

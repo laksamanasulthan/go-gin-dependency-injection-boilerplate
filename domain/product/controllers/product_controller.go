@@ -40,3 +40,12 @@ func (c *ProductController) Index(ctx *gin.Context) {
 // func (c *ProductController) delete(ctx *gin.Context) {
 
 // }
+
+func (c *ProductController) TestJson(ctx *gin.Context) {
+
+	useService := c.service.TestService()
+	resp := ", This is from Controller"
+	ctx.JSON(200, gin.H{
+		"message": useService + resp,
+	})
+}

@@ -12,6 +12,7 @@ type ProductRepository interface {
 	CreateProduct(product *models.Product) error
 	UpdateProduct(product *models.Product) error
 	DeleteProduct(id uint) error
+	TestRepo() string
 }
 
 type productRepository struct {
@@ -52,4 +53,11 @@ func (r *productRepository) UpdateProduct(product *models.Product) error {
 
 func (r *productRepository) DeleteProduct(id uint) error {
 	return r.db.Delete(&models.Product{}, id).Error
+}
+
+func (r *productRepository) TestRepo() string {
+
+	resp := "This is from Product Repository"
+
+	return resp
 }
