@@ -1,1 +1,42 @@
 package services
+
+import (
+	"go-gin-dependency-injection-boilerplate/domain/product/models"
+	"go-gin-dependency-injection-boilerplate/domain/product/repositories"
+)
+
+type ProductService interface {
+	GetAllProduct() ([]models.Product, error)
+	GetProductById(id uint) (*models.Product, error)
+	CreateProduct(product *models.Product) error
+	UpdateProduct(product *models.Product) error
+	DeleteProduct(id uint) error
+}
+
+type productService struct {
+	repo repositories.ProductRepository
+}
+
+func NewProductService(repo repositories.ProductRepository) ProductService {
+	return &productService{repo: repo}
+}
+
+func (s *productService) GetAllProduct() ([]models.Product, error) {
+	return s.repo.GetAllProduct()
+}
+
+func (s *productService) GetProductById(id uint) (*models.Product, error) {
+	return s.repo.GetProductById(id)
+}
+
+func (s *productService) CreateProduct(product *models.Product) error {
+	return s.repo.CreateProduct(product)
+}
+
+func (s *productService) UpdateProduct(product *models.Product) error {
+	return s.repo.UpdateProduct(product)
+}
+
+func (s *productService) DeleteProduct(id uint) error {
+	return s.repo.DeleteProduct(id)
+}
