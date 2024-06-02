@@ -4,8 +4,10 @@ import (
 	"go-gin-dependency-injection-boilerplate/injector"
 	"go-gin-dependency-injection-boilerplate/routes"
 	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -26,7 +28,17 @@ func main() {
 		})
 	})
 
-	if err := router.Run(":7890"); err != nil {
+	err = godotenv.Load()
+
+	if err != nil {
+		log.Fatalf("Error loading .env file: %s", err)
+	}
+
+	app_port := os.Getenv("APP_PORT")
+
+	addr := ":" + app_port
+
+	if err := router.Run(addr); err != nil {
 		log.Fatal(err)
 	}
 }
