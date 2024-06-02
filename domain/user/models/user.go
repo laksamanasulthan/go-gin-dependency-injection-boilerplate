@@ -2,11 +2,11 @@ package models
 
 import "time"
 
-type Product struct {
+type User struct {
 	ID        uint   `gorm:"primarykey,autoIncrement" json:"id"`
-	Name      string `json:"name"`
-	Price     string `json:"price"`
-	Qty       uint   `json:"qty"`
+	Email     string `json:"name"`
+	Username  string `json:"price"`
+	Password  string `json:"qty"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }

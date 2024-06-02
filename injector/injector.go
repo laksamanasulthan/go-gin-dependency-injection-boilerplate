@@ -3,6 +3,8 @@ package injector
 import (
 	"fmt"
 	product_injector "go-gin-dependency-injection-boilerplate/domain/product/injector"
+	product_models "go-gin-dependency-injection-boilerplate/domain/product/models"
+	user_models "go-gin-dependency-injection-boilerplate/domain/user/models"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -30,6 +32,16 @@ func NewInjector() (*Injector, error) {
 		db_username, db_password, db_host, db_port, db_database)
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+
+	if err != nil {
+		return nil, err
+	}
+
+	//Auto-Migration
+	err = db.AutoMigrate(
+		&product_models.Product{},
+		&user_models.User{},
+	)
 
 	if err != nil {
 		return nil, err
